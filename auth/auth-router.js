@@ -8,7 +8,7 @@ const User = require('../users/user-model')
 
 const {isValid} = require('../users/users-services')
 
-router.post('/signup', (req, res) => {
+router.post('/register', (req, res) => {
     const creds = req.body
 
     if(isValid(creds)){
