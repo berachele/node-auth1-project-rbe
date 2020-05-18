@@ -68,6 +68,25 @@ router.post('/login', (req, res) => {
     }
 })
 
+router.get('/users', (req, res) => {
+    if(req.session && req.session.loggedIn){
+        User.find()
+        .then(users => {
+            res.status(200).json(users)
+        })
+        .catch(err => {
+            console.log({err})
+            res.status(500).json({
+                message: "There was an error getting users information"
+            })
+        })
+    }else{
+        res.status(401).json({
+            message: "Please log in to access"
+        })
+    }
+})
+
 router.get('/logout', (req, res) => {
     if(req.session){
         res.session.destroy(err => {
